@@ -1,0 +1,49 @@
+{% extends 'apps.html'%}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row mt-5">
+			<div class="col">
+				<form method="POST" action="{% url 'home' %}">{% csrf_token %}
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div class="input-group mb-3">
+									<input type="text" class="form-control rounded-0" placeholder="Paste a link to shorten it" name="old_url" aria-label="Shorten URL" aria-describedby="">
+									<div class="input-group-append">
+										<input type="submit" name="submit" value="SHORTEN" class="btn btn-primary rounded-0" required>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div> 
+
+		<div class="row mt-2 p-5">
+			<div class="col">
+				<div class="container">
+					{% if new_url %}
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<h4>Shorten URL</h4>
+						<table class="table table-striped">
+							<tr style="line-height: 5px;">
+								<td>URL</td>
+								<td><a href="{{ old_url}}">{{ old_url }}</a></td>
+							</tr>
+							<tr style="line-height: 5px;">
+								<td>New URL</td>
+								<td><a href="{{  new_url }}">{{ new_url }}</a></td>
+							</tr>
+						</table>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
